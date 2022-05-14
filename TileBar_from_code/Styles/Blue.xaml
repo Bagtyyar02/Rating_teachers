@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TileBar_from_code">
+    <!--Main-->
+    <SolidColorBrush x:Key="ThemeColorBrush" Color="#2B579A"></SolidColorBrush>
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="MainWhiteFontColor" Color="#FFFFFF"></SolidColorBrush>
+    <SolidColorBrush x:Key="MainBlackFontColor" Color="#444444"></SolidColorBrush>
+    <SolidColorBrush x:Key="MainWindowSplitBorderBrush" Color="#CCCCCC"></SolidColorBrush>
+    <SolidColorBrush x:Key="UserControlButtonIsPressedBrush" Color="#A3BDE3"></SolidColorBrush>
+    <SolidColorBrush x:Key="ManagementColorBrush" Color="#F1A128"></SolidColorBrush>
+    <SolidColorBrush x:Key="ControlHeaderBackgroundPressdBrush" Color="#D5E1F2"></SolidColorBrush>
+    <SolidColorBrush x:Key="ControlHeaderForegroundPressdBrush" Color="#19478A"></SolidColorBrush>
+    <SolidColorBrush x:Key="UserControlButtonMouseOverBrush" Color="#D5E1F2"></SolidColorBrush>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#F6F6F6"></SolidColorBrush>
+    <SolidColorBrush x:Key="NavigationBackgroundColorPressed" Color="#19478A"></SolidColorBrush>
+    <SolidColorBrush x:Key="RequiredBrush" Color="#cc0000"></SolidColorBrush>
+</ResourceDictionary>

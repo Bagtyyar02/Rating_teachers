@@ -1,0 +1,18 @@
+<dxg:GridColumn IsSmart="True"
+                            FieldName="Completion"
+                            Header="% Complete"
+                            MinWidth="200"
+                            Width="304"
+                            SortOrder="Ascending"
+                            SortIndex="0">
+                <dxg:GridColumn.DisplayTemplate>
+                    <ControlTemplate>
+                        <dxe:ProgressBarEdit Value="{Binding RowData.Row.teacher_point}"
+                                             ContentDisplayMode="Value"
+                                             DisplayFormatString="{}{0}%"
+                                             ShowBorder="False"
+                                             Height="18" />
+                    </ControlTemplate>
+                </dxg:GridColumn.DisplayTemplate>
+            </dxg:GridColumn>
+            

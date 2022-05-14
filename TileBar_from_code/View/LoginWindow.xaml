@@ -1,0 +1,85 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:local="clr-namespace:TileBar_from_code.Converters"
+   x:Name="loginWindow"
+    FocusManager.FocusedElement="{Binding ElementName=uName}"
+        xmlns:ViewModel="clr-namespace:TileBar_from_code.ViewModel"
+    x:Class="TileBar_from_code.View.LoginWindow"
+        WindowStartupLocation="CenterScreen" 
+    SizeToContent="WidthAndHeight" SnapsToDevicePixels="True"
+        Background="{DynamicResource WindowBackgroundBrush}"
+       mc:Ignorable="d"
+        Title="Giriş penjiresi" >
+    <Window.Resources>
+        <local:dk_MultiBindingConverter x:Key="MultiBindingConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <ViewModel:LoginWindowViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding AdminLoginCommand}">
+            <KeyBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultiBindingConverter}">
+                    <Binding Path="Text" ElementName="uName"/>
+                    <Binding ElementName="uPass"/>
+                    <Binding ElementName="loginWindow"/>
+                </MultiBinding>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
+    </Window.InputBindings>
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:CurrentWindowService />
+    </dxmvvm:Interaction.Behaviors>
+    <Grid Height="500" Width="500">
+      
+        <Grid Grid.Column="2" Name="LocalLoginGrid" Visibility="Visible" Width="380">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Icons/employees-server.png" Height="64" Width="64" Margin="0,20,0,0" />
+                <TextBlock Text="Admin maglumatlaryňyzy giriziň" MaxWidth="200" Margin="0,4,0,12" 
+                           HorizontalAlignment="Center" Foreground="{DynamicResource MainBlackFontColor}" 
+                           FontFamily="Segoe UI Semilight" TextAlignment="Center" FontSize="25" TextWrapping="WrapWithOverflow" ></TextBlock>
+                <Grid Margin="0,0,0,8">
+                    <TextBlock  Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Center" FontSize="16" Height="22" Text="Username" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=LocalUserNameTextBox, Path=Text, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <dxe:TextEdit NullText="Admin ady" FontSize="15" 
+                                  x:Name="uName"
+                                 TabIndex="4" />
+                </Grid>
+                <Grid Margin="0,0,0,8">
+                    <dxe:PasswordBoxEdit NullText="Admin koduňzy giriziň" FontSize="15" 
+                                         TabIndex="5" 
+                                         x:Name="uPass"
+                                         Background="Transparent" HorizontalContentAlignment="Left"   Height="36" Width="220"   />
+                </Grid>
+
+                <Grid Margin="0,0,0,8">
+                    <Button Command="{Binding AdminLoginCommand}" Content="Admin giriş" Width="220" Height="36" Margin="0,0,0,32" TabIndex="6" >
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiBindingConverter}">
+                                <Binding Path="Text" ElementName="uName"/>
+                                <Binding ElementName="uPass"/>
+                                <Binding ElementName="loginWindow"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+                <Grid Margin="0,0,0,8">
+                    <Button Command="{Binding UserLoginCommand}" Background="DarkCyan" Content="Ulanjy giriş" Width="220" Height="36" Margin="0,20,0,0" TabIndex="7" >
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiBindingConverter}">
+                               
+                                <Binding ElementName="loginWindow"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

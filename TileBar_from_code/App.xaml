@@ -1,0 +1,41 @@
+﻿<Application x:Class="TileBar_from_code.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             
+             StartupUri="View/LoginWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TileBar_from_code;component/Themes/Shared.xaml" />
+                <ResourceDictionary Source="Styles/Blue.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/CoreResourceDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/DataWindowResourceDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/UserControlResourceDictionary.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type dx:WaitIndicator}">
+                <Setter Property="Content" Value="Ýüklenýär"/>
+            </Style>
+
+            <dx:DXSplashScreenService x:Key="WaitIndicatorService">
+                <dx:DXSplashScreenService.ViewTemplate>
+                    <DataTemplate>
+                        <dx:WaitIndicator Focusable="False" DeferedVisibility="True">
+                            <dx:WaitIndicator.ContentTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Garaşyň" FontSize="16"/>
+                                        <TextBlock Text="Ýüklenýär" FontSize="13"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </dx:WaitIndicator.ContentTemplate>
+                        </dx:WaitIndicator>
+                    </DataTemplate>
+                </dx:DXSplashScreenService.ViewTemplate>
+            </dx:DXSplashScreenService>
+
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+</Application>

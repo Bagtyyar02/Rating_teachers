@@ -1,0 +1,41 @@
+﻿<Window x:Class="TileBar_from_code.View.Dialogs.wndErrorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TileBar_from_code.View.Dialogs"
+        mc:Ignorable="d" WindowStyle="None"
+        Title="wndErrorDialog" SizeToContent="WidthAndHeight" MinHeight="120" MinWidth="400"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        BorderBrush="Red" BorderThickness="4" Background="#FF7E0000"
+        MouseDown="Window_MouseDown" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      MaxWidth="800">
+            <TextBox Text="{Binding exMessage}" Foreground="White"
+                     IsEnabled="True" IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto"/>
+        </ScrollViewer>
+        
+        <TextBox MinHeight="100" MinWidth="290" MaxHeight="300" MaxWidth="800"
+                 HorizontalScrollBarVisibility="Auto"
+                 Text="{Binding StackTrace}" Foreground="Gray"
+                 Visibility="{Binding innerVisibility}"
+                 IsEnabled="True" IsReadOnly="True"
+                 VerticalScrollBarVisibility="Auto"
+                 
+        />
+        <Button Content="OK" Width="90" Margin="20 20 20 0" IsCancel="True" Background="Red" BorderBrush="Red"/>
+        <TextBlock Text="{Binding Handling}" HorizontalAlignment="Left" Foreground="Red" Background="Black"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,209 @@
+﻿<UserControl xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:ViewModel="clr-namespace:TileBar_from_code.ViewModel"
+             x:Class="TileBar_from_code.View.MainView"
+             mc:Ignorable="d">
+    
+    <Grid Background="Azure">
+        <Grid.Resources>
+            <Style TargetType="{x:Type dxg:GridColumn}">
+                <Setter Property="HorizontalHeaderContentAlignment"
+                        Value="Center" />
+                <Setter Property="MaxWidth"
+                        Value="500" />
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"
+                                       Height="Auto"
+                                       
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="AllowResizing"
+                        Value="false" />
+                <Setter Property="EditSettings">
+                    <Setter.Value>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Center" />
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <dxg:GridControl ItemsSource="{Binding Unknown_Objects}"
+                        SelectedItem="{Binding Selected_obj}"
+                       
+                         AutoGenerateColumns="AddNew">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                       Command="{Binding EditCommand}"
+                                      
+                                       EventName="MouseDoubleClick" EventArgsConverter="{dx:EventArgsToDataRowConverter}"/>
+                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                       Command="{Binding SelectedItemCommand}"
+                                      
+                                       EventName="FocusedRowChanged" EventArgsConverter="{dx:EventArgsToDataRowConverter}"/>
+            </dxmvvm:Interaction.Behaviors>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count"
+                                     Alignment="Right" />
+
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:TableView AllowMoveColumnToDropArea="False"
+                           ShowTotalSummary="True"
+                           ShowGroupPanel="False"
+                           ShowIndicator="False"
+                           ShowHorizontalLines="True"
+                               AllowEditing="False">
+                    <dxg:TableView.RowStyle>
+                        <Style TargetType="{x:Type dxg:RowControl}">
+                            <Setter Property="MinHeight" Value="40"/>
+                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="MinHeight" Value="30"/>
+                        </Style>
+                    </dxg:TableView.RowStyle>
+
+                </dxg:TableView>
+
+            </dxg:GridControl.View>
+            <dxg:GridColumn FieldName="T/b"
+                            Header="T/b"
+                            MinWidth="10"
+                            AllowAutoFilter="False"
+                            AllowSorting="true"
+                            AllowColumnFiltering="false"
+                           AllowedSortOrders="Ascending"
+                            AllowedAnyOfFilters="NoneOf"
+                            HorizontalHeaderContentAlignment="Center"
+                            IsSmart="True" />
+            <dxg:GridColumn FieldName="teacher_name"
+                            Header="Ady Familiýasy"
+                            AllowSorting="false"
+                            MinWidth="200"
+                            HorizontalHeaderContentAlignment="Center"
+                            IsSmart="True" />
+            <dxg:GridColumn FieldName="total"
+                            Header="Jemi bal"
+                            AllowSorting="false"
+                            MinWidth="50"
+                            HorizontalHeaderContentAlignment="Center"
+                            IsSmart="True" />
+            <dxg:GridColumn FieldName="teacher"
+                           AllowSorting="false"
+                            Visible="False"
+                            IsSmart="True" />
+        </dxg:GridControl>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <dxc:ChartControl Margin="30 10 15 10 " >
+                <dxc:ChartControl.CrosshairOptions>
+                    <dxc:CrosshairOptions ShowArgumentLabels="True"
+                                      ShowValueLabels="True"
+                                      ShowValueLine="True" />
+                </dxc:ChartControl.CrosshairOptions>
+                <dxc:ChartControl.Titles>
+                    <dxc:Title Content="Ýumuşlar"
+                           HorizontalAlignment="Center" />
+                </dxc:ChartControl.Titles>
+
+                <dxc:XYDiagram2D>
+
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.WholeRange>
+
+                                <dxc:Range MinValue="0"
+                                       SideMarginsValue="10">
+                                    <dxc:Range.MaxValue>
+                                        <System:Double>100</System:Double>
+                                    </dxc:Range.MaxValue>
+
+                                </dxc:Range>
+                            </dxc:AxisY2D.WholeRange>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D>
+                            <dxc:AxisX2D.WholeRange>
+                                <dxc:Range MaxValue="5"/>
+                            </dxc:AxisX2D.WholeRange>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+
+                    <dxc:BarSideBySideSeries2D  DataSource="{Binding selected_teacher.tasks, UpdateSourceTrigger=PropertyChanged}"
+                                                DisplayName="birzatlar"
+                                                ArgumentDataMember="task_name"
+                                                ValueDataMember="percentage"
+                                                LabelsVisibility="True"
+                                                LegendTextPattern="{}{A}{S}{A}: {V}"
+                                                CrosshairLabelPattern="${V:f2}% ">
+                        <dxc:BarSideBySideSeries2D.Label>
+                            <dxc:SeriesLabel TextPattern="{}{V}%"
+                                             dxc:BarSideBySideSeries2D.LabelPosition="Center"/>
+
+                        </dxc:BarSideBySideSeries2D.Label>
+                        <dxc:BarSideBySideSeries2D.Model>
+                            <dxc:FlatBar2DModel />
+                        </dxc:BarSideBySideSeries2D.Model>
+                    </dxc:BarSideBySideSeries2D>
+                </dxc:XYDiagram2D>
+
+            </dxc:ChartControl>
+            <dxc:ChartControl Grid.Column="1"
+                              Margin="15 10 30 10">
+                <dxc:SimpleDiagram2D>
+                    <dxc:PieSeries2D DisplayName=" Ýumuş analitika"
+                                     
+                                     DataSource="{Binding selected_teacher.tasks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     ArgumentDataMember="task_name"
+                                     ValueDataMember="task_point"
+                                     LabelsVisibility="True"
+                                     
+                                   
+                                     HoleRadiusPercent="50">
+                        <!--region #Model-->
+                        <dxc:PieSeries2D.Model>
+                            <dxc:GlarePie2DModel />
+                        </dxc:PieSeries2D.Model>
+                        <!--endregion #Model-->
+                        <dxc:PieSeries2D.TotalLabel>
+                            <dxc:PieTotalLabel TextPattern="Jemi:&#xA;{TV}"  />
+                        </dxc:PieSeries2D.TotalLabel>
+                        <dxc:PieSeries2D.Label>
+                            <dxc:SeriesLabel TextPattern="{}{V}"
+                                             />
+                        </dxc:PieSeries2D.Label>
+
+                    </dxc:PieSeries2D>
+
+                </dxc:SimpleDiagram2D>
+
+
+            </dxc:ChartControl>
+        </Grid>
+    </Grid>
+</UserControl>

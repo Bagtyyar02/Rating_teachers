@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="DataWindowHeaderStackPanelStyle" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="Orientation"
+                Value="Horizontal"></Setter>
+    </Style>
+
+    <Style x:Key="DataWindowTitelLabelStyle" TargetType="Label">
+        <Setter Property="FontSize"
+                Value="22" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MainBlackFontColor}"></Setter>
+    </Style>
+
+    <Style x:Key="DataWindowCloseButtonStackPanelStyle" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment"
+                Value="Right" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="Margin"
+                Value="0,0,12,0" />
+    </Style>
+
+    <Style x:Key="DataWindowContentBorderStyle" TargetType="Border">
+        <Setter Property="BorderThickness"
+                Value="0,1,0,1" />
+        <Setter Property="MinHeight"
+                Value="200"></Setter>
+        <Setter Property="BorderBrush"
+                Value="{StaticResource MainWindowSplitBorderBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="DataWindowRowStackPanelStyle" TargetType="StackPanel">
+        <Setter Property="Orientation"
+                Value="Horizontal" />
+        <Setter Property="Margin"
+                Value="20,4,20,4"></Setter>
+    </Style>
+
+    <Style x:Key="DataWindowTextBoxStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="Width"
+                Value="110" />
+        <Setter Property="TextAlignment"
+                Value="Right" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource MainBlackFontColor}" />
+        <Setter Property="FontSize"
+                Value="14"></Setter>
+    </Style>
+
+    <Style x:Key="DataWindowFooterGridStyle" TargetType="Grid">
+        <Setter Property="Background"
+                Value="{StaticResource DataWindowFooterBackgroundBrush}"></Setter>
+    </Style>
+</ResourceDictionary>

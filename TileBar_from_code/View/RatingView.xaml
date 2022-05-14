@@ -1,0 +1,144 @@
+﻿<UserControl xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"  
+             x:Class="TileBar_from_code.View.RatingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TileBar_from_code.View"
+              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxet="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys"
+             xmlns:ViewModel="clr-namespace:TileBar_from_code.ViewModel"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxei="http://schemas.devexpress.com/winfx/2008/xaml/editors/internal"
+             xmlns:user="clr-namespace:TileBar_from_code.Helper" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+  
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                 </ResourceDictionary.MergedDictionaries>
+         
+            <dxmvvm:BooleanNegationConverter
+                x:Key="InvertedBoolConverter" />
+            <Style x:Key="completionColumnTotalSummaryContentStyle"
+               TargetType="{x:Type ContentPresenter}">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Right"
+                                    Margin="{StaticResource totalSummaryMargin}">
+                                <TextBlock HorizontalAlignment="Right"
+                                       Foreground="{StaticResource grayForegroundBrush}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextAlignment="Right"
+                                       IsHitTestVisible="False"><Run Text="TOTAL # OF TASKS" /><LineBreak /><Run Text="{Binding Column.TotalSummaryText, Mode=OneWay}"
+                                                                                                               FontWeight="Bold" /></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ControlTemplate x:Key="{dxet:ProgressBarEditThemeKey IsThemeIndependent=True, ResourceKey=PanelBackgroundHorizontalTemplate}"
+                         TargetType="{x:Type ContentControl}">
+                <Border Background="Transparent" />
+            </ControlTemplate>
+            <ControlTemplate x:Key="{dxet:ProgressBarEditThemeKey IsThemeIndependent=True, ResourceKey=PanelLeftSideHorizontalTemplate}"
+                         TargetType="{x:Type ContentControl}">
+                <Border Background="#FF00879C" />
+            </ControlTemplate>
+            <ControlTemplate x:Key="{dxet:ProgressBarEditThemeKey IsThemeIndependent=True, ResourceKey=DisplayTemplate}">
+                <dxe:RangeEditBasePanel x:Name="PART_Editor"
+                                    dxei:EditorMarginHelper.Margin="12,10,12,10,0,1,1,1" />
+            </ControlTemplate>
+
+        </ResourceDictionary>
+        
+        </UserControl.Resources>
+    <UserControl.DataContext>
+        <ViewModel:MainViewModel />
+    </UserControl.DataContext>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxwui:WinUIMessageBoxService />
+        <dxwui:WinUIDialogService />
+        <dx:WindowedDocumentUIService  WindowType="{x:Type dxwui:WinUIDialogWindow}">
+            <dx:WindowedDocumentUIService.WindowStyle>
+                <Style TargetType="{x:Type dxwui:WinUIDialogWindow}">
+                    <Setter Property="ShowTitle"
+                            Value="False" />
+                </Style>
+            </dx:WindowedDocumentUIService.WindowStyle>
+        </dx:WindowedDocumentUIService>
+    </dxmvvm:Interaction.Behaviors>
+
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top"
+                   Text="Mugallymlar"
+                   Style="{StaticResource TextBlockTitleBlueStyle}" />
+        <dxwui:AppBar DockPanel.Dock="Bottom"
+                      HideMode="AlwaysVisible">
+          
+
+
+        </dxwui:AppBar>
+        <dxc:ChartControl Margin="30 10 15 10 " >
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions ShowArgumentLabels="True"
+                                      ShowValueLabels="True"
+                                      ShowValueLine="True" />
+            </dxc:ChartControl.CrosshairOptions>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Content="Mugallymlar, birinji onluk"
+                           HorizontalAlignment="Center" />
+            </dxc:ChartControl.Titles>
+
+            <dxc:XYDiagram2D>
+
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.WholeRange>
+
+                            <dxc:Range MinValue="0"
+                                       SideMarginsValue="10">
+                                
+
+                            </dxc:Range>
+                        </dxc:AxisY2D.WholeRange>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range MaxValue="5"/>
+                        </dxc:AxisX2D.WholeRange>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+
+                <dxc:BarSideBySideSeries2D  DataSource="{Binding top_ten, UpdateSourceTrigger=PropertyChanged}"
+                                              
+                                                ArgumentDataMember="Argument"
+                                                ValueDataMember="Value"
+                                                LabelsVisibility="True"
+                                                >
+                    <dxc:BarSideBySideSeries2D.Label>
+                        <dxc:SeriesLabel TextPattern=""
+                                             dxc:BarSideBySideSeries2D.LabelPosition="Center">
+
+                        </dxc:SeriesLabel>
+
+                    </dxc:BarSideBySideSeries2D.Label>
+                    <dxc:BarSideBySideSeries2D.Model>
+                        <dxc:FlatBar2DModel />
+                    </dxc:BarSideBySideSeries2D.Model>
+                </dxc:BarSideBySideSeries2D>
+            </dxc:XYDiagram2D>
+
+        </dxc:ChartControl>
+    </DockPanel>
+</UserControl>

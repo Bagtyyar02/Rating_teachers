@@ -1,0 +1,108 @@
+﻿<dx:ThemedWindow xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation" 
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:ViewModel="clr-namespace:TileBar_from_code.ViewModel"
+                 x:Class="TileBar_from_code.MainWindow"
+                xmlns:view="clr-namespace:TileBar_from_code.View"
+                 xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+                 xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation"
+                 xmlns:mvvm ="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 Title="{Binding Path=(user:User.IsAdmin), Converter={StaticResource ResourceKey=BooleanToTitleConverter}}"
+                 xmlns:user="clr-namespace:TileBar_from_code.Helper"
+               
+                 WindowState="Maximized"
+                 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 xmlns:dxnavi="http://schemas.devexpress.com/winfx/2008/xaml/navigation/internal"
+                 SnapsToDevicePixels="True"
+                 UseLayoutRounding="True" Icon="{dx:DXImage SvgImages/Chart/ChartType_Bar.svg}">
+    <dx:ThemedWindow.DataContext>
+        <ViewModel:MainViewModel  />
+    </dx:ThemedWindow.DataContext>
+    <dx:ThemedWindow.Resources>
+       
+        <dxmvvm:ObjectToObjectConverter x:Key="TileColorConverter"
+                                        DefaultTarget="#FF404040">
+            <dxmvvm:MapItem Source="mugallym"
+                            Target="#FF00879C" />
+            <dxmvvm:MapItem Source="esasy"
+                            Target="#FF404040" />
+            <dxmvvm:MapItem Source="Employees"
+                            Target="#FFFFFF" />
+          
+        </dxmvvm:ObjectToObjectConverter>
+    </dx:ThemedWindow.Resources>
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".2*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <dxnav:TileBar Background="#FFE8E8E8"
+                       
+                       Padding="0,0,0,27"
+                       ItemSpacing="5"
+                       ItemColorMode="Auto"
+                       DockPanel.Dock="Top"
+                       ShowGroupHeaders="False"
+                       SelectedItem="{Binding SelectedModule, Mode=TwoWay}">
+            <dxmvvm:Interaction.Behaviors>
+               
+            </dxmvvm:Interaction.Behaviors>
+            <dxnav:TileBar.ItemContainerStyle>
+                <Style TargetType="dxnav:TileBarItem">
+                    <Setter Property="ShowFlyoutButton"
+                            Value="False" />
+                    <Setter Property="AllowGlyphTheming"
+                            Value="True" />
+                    <Setter Property="Width"
+                            Value="166" />
+                    
+                </Style>
+            </dxnav:TileBar.ItemContainerStyle>
+            <dxnav:TileBar.GroupStyle>
+                <GroupStyle>
+             
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <dxnavi:TileBarItemsPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </dxnav:TileBar.GroupStyle>
+            <dxnav:TileBarItem Content="Esasy penjire"
+                              ColorMode="Standard"
+                               Background="DarkCyan"
+                               Command="{Binding esasyclicked}" TileGlyph="{dx:DXImage SvgImages/HybridDemoIcons/Tiles/HybridDemo_Dashboard.svg}" />
+
+            <dxnav:TileBarItem Content="Mugallym goş"
+                               x:Name="mugallym"
+                               Background="DarkOrange"
+                               Visibility="{Binding Path=(user:User.IsAdmin), UpdateSourceTrigger=PropertyChanged, Converter={dxmvvm:BooleanToVisibilityConverter}}"
+                               
+                               Command="{Binding mugallymclicked}"
+                               TileGlyph="{dx:DXImage SvgImages/HybridDemoIcons/Tiles/HybridDemo_Employees.svg}" />
+            <dxnav:TileBarItem Content="Ýumuşlar"
+                               ColorMode="Standard"
+                               Background="Gray"
+                               Command="{Binding yumusclicked}"
+                               TileGlyph="{dx:DXImage SvgImages/HybridDemoIcons/BottomPanel/HybridDemo_Task.svg}"
+                               AllowGlyphTheming="True" />
+            <dxnav:TileBarItem Content="Reýting"
+                               ColorMode="Standard"
+                               Background="#FF73C524"
+                               Command="{Binding ratingClicked}"
+                               AllowGlyphTheming="True" TileGlyph="{dx:DXImage SvgImages/HybridDemoIcons/Tiles/HybridDemo_Opportunities.svg}" />
+
+        </dxnav:TileBar>
+        <dxwui:NavigationFrame AnimationType="SlideHorizontal" Grid.Row="1">
+            <mvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand EventName="Loaded"
+                                       Command="{Binding OnViewLoadedCommand}" />
+                <dxwuin:FrameNavigationService />
+
+            </mvvm:Interaction.Behaviors>
+        </dxwui:NavigationFrame>
+    </Grid>
+</dx:ThemedWindow>

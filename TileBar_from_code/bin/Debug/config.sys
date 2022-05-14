@@ -1,0 +1,6 @@
+﻿{
+  "MSSQLServerName": ".",
+  "MSSQLServerUserName": "sa",
+  "MSSQLServerPassword": "123456",
+  "MSSQLServerDbName": "chart"
+ }
